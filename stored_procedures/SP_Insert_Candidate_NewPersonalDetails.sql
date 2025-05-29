@@ -1,0 +1,142 @@
+IF NOT EXISTS (
+    SELECT 1
+    FROM sys.objects
+    WHERE object_id = OBJECT_ID(N'[dbo].[SP_Insert_Candidate_NewPersonalDetails]')
+    AND type = N'P'
+)
+BEGIN
+    EXEC('
+CREATE  procedure [dbo].[SP_Insert_Candidate_NewPersonalDetails]    
+(    
+     @Candidate_Fname  varchar (max),    
+  @Candidate_Lname   varchar (max),    
+  @Candidate_Nationality   varchar (max),    
+  @AdharNumber   varchar (max) ,    
+  @Candidate_Dob   datetime,    
+  @Candidate_Gender   varchar (10),    
+  @Race   varchar (50) ,    
+  @Religion   varchar (100),    
+     @Candidate_Marital_Status   varchar (max) ,    
+  @TypeOfStudent varchar (max),    
+  @Address_Chkbox_Status   bit  ,    
+  @CounselorEmployee_id   bigint  ,    
+  @Candidate_Img   varchar (max) ,    
+  @Disability_Chkbox_Status   bit  ,    
+  @Disability_Type   varchar (max) ,    
+  @BR1M_Status   bit  ,    
+  @Bh1M_Doc_Name   varchar (200) ,      
+  @Candidate_State   varchar (100),    
+  @candidate_city   varchar (100),      
+  @Status   varchar (50) ,     
+  @EnrollBy   varchar (500) ,     
+  @Agent_ID   bigint  ,     
+  @ApplicationStatus   varchar (50) ,     
+  @Enquiry_From   varchar (max),     
+  @SourceofInformation varchar (max),    
+  @Event_Id varchar(max)  ,  
+  @Candidate_Signature_Img varchar(max) ,
+    @salutation  varchar(max)='''',
+  @bhumiputhra bit=0,
+  @RegType varchar(15)='''',
+  @AgentID  varchar(max)='''',
+  @AgentEmail  varchar(max)='''',
+    @CitizenshipStatus varchar(max)='''',@CountryOfCitizenship varchar(100)='''',@MMUStudName varchar(Max)='''',@MMUStudIC varchar(50)='''',
+   @MMUOldStudent varchar(15)='''',@OldStudentId varchar(15)='''',@Supervisor varchar(15)='''',@CoSupervisor varchar(15)='''',@ResearchTitle varchar(15)='''',
+   @Medical_Closure varchar(10)='''',
+   @Type_ofcomment varchar(100)='''',
+   @MethodOfCommunication varchar(500)='''',
+   @CurrentGrade varchar(500)='''',
+   @PresentSchoolName varchar(500)='''',
+   @PastSurgeries varchar(500)='''',
+   @PastMedicalHistory varchar(500)='''',
+   @FamilyDoctorName varchar(500)='''',
+    @FamilyDoctorAddress varchar(500)='''',
+    @Allergy varchar(500)='''',
+    @CandidateAge int,
+    @RefBy varchar(100),
+    @MajorDiff varchar(max),
+    @Height varchar(25),
+    @weight varchar(25),
+    @colorblind varchar(10),
+    @BMI varchar(25),
+    @swmmier varchar(10),
+    @spec varchar(10),
+    @specAid varchar(10),
+    @knownByAlam varchar(500),
+    @Stream varchar(50),
+    @PassportTo varchar(200)='''',
+    @country varchar(200)=''''
+)    
+As    
+    
+Begin    
+   
+ Insert into Tbl_Candidate_Personal_Det(Candidate_Fname,    
+   Candidate_Lname,    
+   Candidate_Nationality,    
+   AdharNumber,    
+   Candidate_Dob,    
+   Candidate_Gender,    
+   Race,    
+   Religion,    
+      Candidate_Marital_Status,    
+   TypeOfStudent,    
+   Address_Chkbox_Status,    
+   CounselorEmployee_id,    
+   Candidate_Img,    
+   Disability_Chkbox_Status,    
+   Disability_Type,    
+   BR1M_Status,    
+   Bh1M_Doc_Name,    
+   Candidate_State,    
+   candidate_city,    
+   Candidate_DelStatus, 
+   
+   RegDate,    
+   Status ,    
+   EnrollBy,    
+   Active_Status,    
+   Agent_ID,    
+   ApplicationStatus,    
+   Enquiry_From,    
+   create_date,    
+   active,Display_Status,ApplicationStage,SourceofInformation,Event_Id,Candidate_Signature_Img,Medical_Closure,Type_ofcomment,MethodOfCommunication,CurrentGrade,PresentSchoolName,PastSurgeries,PastMedicalHistory,FamilyDoctorName,FamilyDoctorAddress,Allergy,Candidate_Age,Candidate_ReferredBy,Candidate_Major_Difficulties,
+   Candidate_Height,Candidate_Weight,Candidate_ColorBlind,Candidate_BMI,Candidate_Swimmer,Candidate_WithSpecs,Candidate_EyeSightAids,KnownByAlam,Candidate_Stream,PassportDate,residing_country)    
+ values( @Candidate_Fname,    
+  @Candidate_Lname,    
+  @Candidate_Nationality,    
+  @AdharNumber,    
+ 
+  @Candidate_Dob,    
+  @Candidate_Gender,    
+  @Race,    
+  @Religion,    
+     @Candidate_Marital_Status,    
+  @TypeOfStudent,    
+  @Address_Chkbox_Status,    
+  @CounselorEmployee_id,    
+  @Candidate_Img,    
+  @Disability_Chkbox_Status,    
+  @Disability_Type,    
+  @BR1M_Status,    
+  @Bh1M_Doc_Name,    
+  @Candidate_State,    
+  @candidate_city,    
+  0,    
+  getdate(),    
+  @Status ,    
+  @EnrollBy,    
+  ''ACTIVE'',    
+  @Agent_ID,    
+  @ApplicationStatus,    
+  @Enquiry_From,    
+  getdate(),    
+  1,''Candidatefirst'',''Initial Application'',@SourceofInformation,@Event_Id,@Candidate_Signature_Img,@Medical_Closure,@Type_ofcomment,@MethodOfCommunication,@CurrentGrade,@PresentSchoolName,@PastSurgeries,@PastMedicalHistory,@FamilyDoctorName,@FamilyDoctorAddress,@Allergy,@CandidateAge,@RefBy,@MajorDiff,
+  @Height,@weight,@colorblind,@BMI,@swmmier,@spec,@specAid,@knownByAlam,@Stream,@PassportTo,@country)    
+     
+ Select SCOPE_IDENTITY()    
+End
+
+')
+END
+GO
